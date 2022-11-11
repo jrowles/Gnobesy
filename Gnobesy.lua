@@ -1,5 +1,5 @@
 local guildBankOpen = false;
-local GNOBESY_VERSION = "0.2.1";
+local GNOBESY_VERSION = "0.3.0";
 
 local moves = {};
 local depth = 0;
@@ -371,8 +371,8 @@ local function GuildUIBankPermissionsTab()
     ShowUIPanel(GuildControlUI);
 end
 
-function GNOBESY_MainFrame_OnEvent(self, event, ...)
-    if event == "GUILDBANKFRAME_OPENED" then
+function GNOBESY_MainFrame_OnEvent(self, event, arg)
+    if event == "PLAYER_INTERACTION_MANAGER_FRAME_SHOW" and arg == 10 then
         if guildBankOpen == false then
             guildBankOpen = true;
             local gbframe = _G["GuildBankFrame"];
@@ -443,7 +443,7 @@ function GNOBESY_MainFrame_OnLoad(self)
 
     DEFAULT_CHAT_FRAME:AddMessage(GNOBESY_LOAD_BANNER);
 
-    self:RegisterEvent("GUILDBANKFRAME_OPENED");
+    self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW");
     self:RegisterEvent("VARIABLES_LOADED");
 end
 
