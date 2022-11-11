@@ -2,7 +2,7 @@
 ..\FrameXML\UI.xsd">
 
 	<!-- Template Definitions -->
-	<CheckButton name="GNOBESYCheckTemplate" inherits="InterfaceOptionsSmallCheckButtonTemplate" virtual="true">
+	<CheckButton name="GNOBESYCheckTemplate" inherits="InterfaceOptionsCheckButtonTemplate" virtual="true">
 		<HitRectInsets>
 			<AbsInset left="0" right="0" top="0" bottom="0" />
 		</HitRectInsets>
