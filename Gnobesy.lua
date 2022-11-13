@@ -1,5 +1,7 @@
 local guildBankOpen = false;
-local GNOBESY_VERSION = "0.3.0";
+local GNOBESY_VERSION = "0.3.1";
+
+local MAX_GUILDBANK_SLOTS_PER_TAB = 98;
 
 local moves = {};
 local depth = 0;
