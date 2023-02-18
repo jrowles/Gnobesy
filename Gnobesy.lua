@@ -1,5 +1,5 @@
 local guildBankOpen = false;
-local GNOBESY_VERSION = "0.3.1";
+local GNOBESY_VERSION = "0.3.2";
 
 local MAX_GUILDBANK_SLOTS_PER_TAB = 98;
 
@@ -123,9 +123,6 @@ local function CompareItems(lItem, rItem)
     end
 end
 
-local scanTooltip = CreateFrame("GameTooltip", "GNOBESY_Tooltip", UIParent, "GameTooltipTemplate");
-scanTooltip:SetOwner(UIParent, "ANCHOR_NONE");
-
 local function CreateMove(source, target)
     local move = {};
     if source.id ~= nil then
@@ -231,9 +228,14 @@ local function AddItem(i, collection, tab)
     if item.id ~= nil then
         item.count = count;
         item.name, _, item.quality, _, _, item.class, item.subclass, _, item.type, _, item.price = GetItemInfo(item.id);
+		
         if item.id == 82800 then -- GetItemInfo returns a bogus name for caged pets
-            local speciesID, level, breedQuality, maxHealth, power, speed, name = scanTooltip:SetGuildBankItem(tab, i);
-            item.name = strjoin("#",name,level,breedQuality,maxHealth,power,speed);
+			local petCage = C_TooltipInfo.GetGuildBankItem(tab, i);
+			TooltipUtil.SurfaceArgs(petCage)
+			
+			if petCage.battlePetSpeciesID then
+				item.name = strjoin("#", petCage.battlePetName, petCage.battlePetLevel, petCage.battlePetBreedQuality, petCage.battlePetMaxHealth, petCage.battlePetPower, petCage.battlePetSpeed);
+			end
         end
     end
     table.insert(collection, item);
